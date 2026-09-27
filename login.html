@@ -1,1 +1,347 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AI Scanner - Login</title>
 
+    <style>
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            font-family: Arial, sans-serif;
+        }
+
+        body {
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: #080b12;
+            color: white;
+            padding: 20px;
+        }
+
+        .container {
+            width: 100%;
+            max-width: 420px;
+            background: #111722;
+            border: 1px solid #273142;
+            border-radius: 18px;
+            padding: 30px;
+            box-shadow: 0 20px 60px rgba(0,0,0,0.45);
+        }
+
+        .logo {
+            text-align: center;
+            margin-bottom: 25px;
+        }
+
+        .logo h1 {
+            font-size: 28px;
+            margin-bottom: 8px;
+        }
+
+        .logo p {
+            color: #8d98aa;
+            font-size: 14px;
+        }
+
+        .tabs {
+            display: flex;
+            margin-bottom: 25px;
+            background: #080b12;
+            border-radius: 10px;
+            padding: 4px;
+        }
+
+        .tab {
+            width: 50%;
+            padding: 11px;
+            border: none;
+            border-radius: 8px;
+            background: transparent;
+            color: #8d98aa;
+            cursor: pointer;
+            font-size: 14px;
+        }
+
+        .tab.active {
+            background: #1d2635;
+            color: white;
+        }
+
+        .form-group {
+            margin-bottom: 17px;
+        }
+
+        label {
+            display: block;
+            margin-bottom: 7px;
+            font-size: 13px;
+            color: #aab4c4;
+        }
+
+        input {
+            width: 100%;
+            padding: 13px;
+            border-radius: 9px;
+            border: 1px solid #303b4d;
+            background: #080b12;
+            color: white;
+            outline: none;
+        }
+
+        input:focus {
+            border-color: #5b8cff;
+        }
+
+        .main-btn {
+            width: 100%;
+            padding: 14px;
+            margin-top: 5px;
+            border: none;
+            border-radius: 9px;
+            background: #2864ff;
+            color: white;
+            font-size: 15px;
+            font-weight: bold;
+            cursor: pointer;
+        }
+
+        .main-btn:hover {
+            opacity: 0.9;
+        }
+
+        .message {
+            margin-top: 15px;
+            text-align: center;
+            font-size: 13px;
+            min-height: 18px;
+        }
+
+        .forgot {
+            display: block;
+            text-align: right;
+            margin: -5px 0 17px;
+            color: #6d9aff;
+            font-size: 12px;
+            text-decoration: none;
+        }
+
+        .hidden {
+            display: none;
+        }
+
+        .notice {
+            margin-top: 20px;
+            padding: 12px;
+            background: #171e2b;
+            border-radius: 9px;
+            color: #8d98aa;
+            font-size: 12px;
+            text-align: center;
+            line-height: 1.5;
+        }
+    </style>
+</head>
+
+<body>
+
+<div class="container">
+
+    <div class="logo">
+        <h1>AI SCANNER</h1>
+        <p>Prediction & Trading Platform</p>
+    </div>
+
+    <div class="tabs">
+        <button class="tab active" id="loginTab" onclick="showLogin()">
+            Login
+        </button>
+
+        <button class="tab" id="registerTab" onclick="showRegister()">
+            Create Account
+        </button>
+    </div>
+
+    <!-- LOGIN -->
+
+    <form id="loginForm">
+
+        <div class="form-group">
+            <label>Email</label>
+            <input
+                type="email"
+                id="loginEmail"
+                placeholder="Enter your email"
+                required
+            >
+        </div>
+
+        <div class="form-group">
+            <label>Password</label>
+            <input
+                type="password"
+                id="loginPassword"
+                placeholder="Enter your password"
+                required
+            >
+        </div>
+
+        <a href="#" class="forgot">
+            Forgot password?
+        </a>
+
+        <button type="submit" class="main-btn">
+            LOGIN
+        </button>
+
+    </form>
+
+
+    <!-- REGISTER -->
+
+    <form id="registerForm" class="hidden">
+
+        <div class="form-group">
+            <label>Name</label>
+            <input
+                type="text"
+                id="registerName"
+                placeholder="Your name"
+                required
+            >
+        </div>
+
+        <div class="form-group">
+            <label>Email</label>
+            <input
+                type="email"
+                id="registerEmail"
+                placeholder="Your email"
+                required
+            >
+        </div>
+
+        <div class="form-group">
+            <label>Password</label>
+            <input
+                type="password"
+                id="registerPassword"
+                placeholder="Create a password"
+                minlength="8"
+                required
+            >
+        </div>
+
+        <div class="form-group">
+            <label>Confirm Password</label>
+            <input
+                type="password"
+                id="registerConfirm"
+                placeholder="Confirm password"
+                minlength="8"
+                required
+            >
+        </div>
+
+        <button type="submit" class="main-btn">
+            CREATE ACCOUNT
+        </button>
+
+    </form>
+
+    <div id="message" class="message"></div>
+
+    <div class="notice">
+        New accounts require administrator approval
+        before accessing the AI Scanner.
+    </div>
+
+</div>
+
+
+<script>
+
+    const loginForm = document.getElementById("loginForm");
+    const registerForm = document.getElementById("registerForm");
+
+    const loginTab = document.getElementById("loginTab");
+    const registerTab = document.getElementById("registerTab");
+
+    const message = document.getElementById("message");
+
+
+    function showLogin() {
+
+        loginForm.classList.remove("hidden");
+        registerForm.classList.add("hidden");
+
+        loginTab.classList.add("active");
+        registerTab.classList.remove("active");
+
+        message.textContent = "";
+    }
+
+
+    function showRegister() {
+
+        loginForm.classList.add("hidden");
+        registerForm.classList.remove("hidden");
+
+        loginTab.classList.remove("active");
+        registerTab.classList.add("active");
+
+        message.textContent = "";
+    }
+
+
+    registerForm.addEventListener("submit", function(event) {
+
+        event.preventDefault();
+
+        const name =
+            document.getElementById("registerName").value.trim();
+
+        const email =
+            document.getElementById("registerEmail").value.trim();
+
+        const password =
+            document.getElementById("registerPassword").value;
+
+        const confirm =
+            document.getElementById("registerConfirm").value;
+
+
+        if (password !== confirm) {
+
+            message.textContent =
+                "Passwords do not match.";
+
+            return;
+        }
+
+
+        message.textContent =
+            "Account created. Waiting for administrator approval.";
+
+        registerForm.reset();
+
+    });
+
+
+    loginForm.addEventListener("submit", function(event) {
+
+        event.preventDefault();
+
+        message.textContent =
+            "Login system will be connected to the secure server next.";
+
+    });
+
+</script>
+
+</body>
+</html>
