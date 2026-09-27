@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>US30 AI ANALYSER — Deriv Matches</title>
+<link rel="stylesheet" href="style.css" />
+</head>
+<body>
+<div class="app-shell">
+  <header class="topbar">
+    <button class="icon-btn menu" aria-label="Menu">☰</button>
+    <div class="avatar">US</div>
+    <button class="refresh" id="refreshBtn" aria-label="Reconnect">↻</button>
+    <div class="currency">USD <span>▾</span></div>
+    <button class="account-btn" id="accountBtn">Connect Deriv Account</button><div class="balance"><span class="coin">Ð</span><strong id="balance">Not connected</strong><span class="chev">⌄</span></div>
+  </header>
+
+  <nav class="tabs">
+    <button class="tab active" data-tab="signal">◎ <span>Signal AI</span></button>
+    <button class="tab" data-tab="manual">▣ <span>Manual Trader</span></button>
+    <button class="tab" data-tab="bulk">▱ <span>Bulk Trade</span></button>
+  </nav>
+
+  <main>
+    <section class="market-card">
+      <div>
+        <div class="market-title"><span class="digit-icon" id="marketCode">AUTO</span><span id="marketName">All Volatility Indices</span></div>
+        <div class="market-price">
+          <span id="price">Connecting…</span>
+          <span class="muted" id="change">Waiting for live tick</span>
+          <span class="up" id="trend">●</span>
+        </div>
+      </div>
+      <div class="live-status" id="status"><span></span> CONNECTING</div>
+      <select class="market-selector" id="marketSelector"><option value="AUTO">AUTO — All Volatility Indices</option></select>
+    </section>
+
+    <section class="digits" id="digits"></section>
+    <section class="opportunity-panel"><div class="opportunity-title">MATCH opportunities</div><div id="scanningNow" class="scanning-now">Scanning now: —</div><div id="opportunityList"><div class="empty-opps">Scanning Volatility Indices…</div></div></section>
+    <div class="pager"><button id="prev">≪</button><button id="next">≫</button></div>
+
+    <section class="ai-signal-card" id="aiSignalCard">
+      <div class="ai-head"><span>🤖</span><b>US30 AI ANALYSER</b><span class="ai-live">MATCHES ONLY</span></div>
+      <div class="signal-main">
+        <div>
+          <small id="signalLabel">ANALYZING</small>
+          <strong id="signalText">WAITING FOR DATA</strong>
+        </div>
+        <div class="confidence"><small>Confidence</small><b id="confidence">—%</b></div>
+      </div>
+      <div class="signal-stats">
+        <span>Last digit <b id="lastDigit">—</b></span>
+        <span>Target <b id="targetDigit">—</b></span>
+        <span>Sample <b id="sampleSize">0</b></span>
+      </div>
+      <div class="signal-note" id="signalNote">Collecting live ticks before generating a signal.</div>
+    </section>
+
+    <section class="trade-panel">
+      <div class="handle"></div>
+      <a class="learn">Learn about this trade type</a>
+      <button class="trade-type" id="typeBtn"><span>✣</span><b>Matches</b><span>›</span></button>
+      <div class="number-grid" id="numberGrid"></div>
+      <div class="stake-row"><label class="ticks-control">Ticks <input id="durationTicks" type="number" min="1" max="10" step="1" value="5" inputmode="numeric" aria-label="Contract duration in ticks"></label><strong id="stake">10.00 USD</strong><span>Stake</span></div>
+      <div class="trade-countdown" id="tradeCountdown" aria-live="polite"><span class="countdown-label">TRADE STATUS</span><strong id="countdownText">READY</strong><small id="countdownDetail">Place a MATCH to start</small></div>
+      <div class="results-row"><span>Wins <b id="wins">0</b></span><span>Losses <b id="losses">0</b></span><span>Net P/L <b id="netPL">0.00 USD</b></span></div>
+      <div class="action-grid">
+        <button class="action matches" id="matches"><b>✣ &nbsp; Matches</b><small>Payout <strong>—</strong></small></button>
+        
+      </div>
+    </section>
+  </main>
+
+  <button class="ai-fab" id="aiBtn"><span>AI</span><i></i></button>
+  <div class="toast" id="toast"></div>
+
+<div class="modal" id="accountModal" aria-hidden="true">
+  <div class="modal-card">
+    <button class="modal-close" id="closeAccount">×</button>
+    <h2>Connect Deriv Account</h2>
+    <p>Use a Deriv API token with the required trading permissions. The token is kept only in this browser session.</p>
+    <label>Deriv API Token</label>
+    <input id="apiToken" type="password" placeholder="Paste your Deriv token" autocomplete="off" />
+    <label>Trading Account</label>
+    <select id="accountSelect" class="account-select"><option value="">Connect token first…</option></select>
+    <button class="connect-primary" id="connectAccount">Connect account</button>
+    <button class="disconnect" id="disconnectAccount">Disconnect</button>
+    <small>Demo accounts use virtual funds. Select DEMO before connecting. For safety, create a token with only the permissions this bot needs. Never share your token with anyone.</small>
+  </div>
+</div>
+</div>
+<script src="script.js"></script>
+</body>
+</html>
